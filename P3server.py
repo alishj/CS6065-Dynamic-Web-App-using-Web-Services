@@ -1,5 +1,6 @@
 import webapp2
 import cgi
+import datetime
 from google.appengine.api import users
 
 class LogoutPage(webapp2.RequestHandler):
@@ -16,6 +17,31 @@ class LogoutPage(webapp2.RequestHandler):
             self.response.headers['Content-Type'] = 'text/html'
             self.response.write(html)
 
+class SendMail(webapp2.RequestHandler):
+    def sendEmail(self):
+        # TODO: Add functionality to send emails based on 
+        return True
+
+    def getMail(self, user, date):
+        # TODO: Add functionality to query database for email information
+        return True
+
+    def post(self):
+        self.response.headers['Content-Type'] = 'text/html'
+        self.response.write('<h1>FUNCTIONALITY TO BE ADDED</h1>')
+        
+            
+class ForceMail(SendMail):
+    def post(self):
+        user = users.get_current_user()
+        if user and not user.user_id() == 'None':
+            # The weekday returns the day of the week from 0-6 Mon-Sun respectively
+            self.getMail(user.user_id(), datetime.datetime.today().weekday())
+            self.response.headers['Content-Type'] = 'text/html'
+            self.response.write("<h1>Today's numeric date is: %s</h1>" % datetime.datetime.today().weekday())
+        else:
+            self.redirect('/Logout')
+            
 class Subscribe(webapp2.RequestHandler):
     def getHTML(self):
         f = open('Subscribe.html', 'r')
@@ -34,9 +60,7 @@ class Subscribe(webapp2.RequestHandler):
 class MainPage(webapp2.RequestHandler):
     def getHTML(self):
         f = open('Main.html', 'r')
-        return f.read()
-
-    
+        return f.read()    
         
     def get(self):
         user = users.get_current_user()
@@ -57,4 +81,6 @@ application = webapp2.WSGIApplication([
     ('/', MainPage),
     ('/Logout', LogoutPage),
     ('/Subscribe', Subscribe),
+    ('/Forcemail', ForceMail),
+    ('/Sendemail', SendMail)
 ],debug=True)
