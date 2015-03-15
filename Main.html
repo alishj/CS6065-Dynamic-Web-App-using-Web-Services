@@ -1,0 +1,21 @@
+<html>
+<body>
+    <p>
+        Welcome %s, please enter URL and days you would like to subscribe to.
+        <form action="/Subscribe" method="post">
+            <input type="text" name="site" value="www.example.com">
+            <input type="checkbox" name="mon" value="Monday">Monday
+            <input type="checkbox" name="tue" value="Tuesday">Tuesday
+            <input type="checkbox" name="wed" value="Wednesday">Wednesday
+            <input type="checkbox" name="thu" value="Thursday">Thursday
+            <input type="checkbox" name="fri" value="Friday">Friday
+            <input type="checkbox" name="sat" value="Saturday">Saturday
+            <input type="checkbox" name="sun" value="Sunday">Sunday
+            <div><input type="submit" value="Subscribe"></div>
+        </form>
+    </p>
+    <p>
+        <a href="%s">logout</a>
+    </p>
+</body>
+</html>
