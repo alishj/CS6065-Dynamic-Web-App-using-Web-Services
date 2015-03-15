@@ -1,16 +1,25 @@
 <html>
     <body>
-        <p>Welcome %s, please subscribe.</p>
+        <p>Welcome %s.</p>
+        <p>Current subscriptions are <br>
+        Monday: %s<br>
+        Tuesday: %s<br>
+        Wednesday: %s<br>
+        Thursday: %s<br>
+        Friday: %s<br>
+        Saturday: %s<br>
+        Sunday: %s<br>
+        </p>
         <form action="/subscribe" method="post">
             <input type="text" name="id" value="%s">
             <input type="text" name="site" value="www.example.com">
-            <input type="radio" name="day" value="Monday">Monday
-            <input type="radio" name="day" value="Tuesday">Tuesday
-            <input type="radio" name="day" value="Wednesday">Wednesday
-            <input type="radio" name="day" value="Thursday">Thursday
-            <input type="radio" name="day" value="Friday">Friday
-            <input type="radio" name="day" value="Saturday">Saturday
-            <input type="radio" name="day" value="Sunday">Sunday
+            <input type="checkbox" name="mon" value="Monday">Monday
+            <input type="checkbox" name="tue" value="Tuesday">Tuesday
+            <input type="checkbox" name="wed" value="Wednesday">Wednesday
+            <input type="checkbox" name="thu" value="Thursday">Thursday
+            <input type="checkbox" name="fri" value="Friday">Friday
+            <input type="checkbox" name="sat" value="Saturday">Saturday
+            <input type="checkbox" name="sun" value="Sunday">Sunday
             <div><input type="submit" value="Subscribe"></div>
         </form>
     </body>
