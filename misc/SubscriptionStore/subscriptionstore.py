@@ -69,13 +69,13 @@ class MainPage(webapp2.RequestHandler):
             # TODO: Allow multiple websites to be shown for each day.
             #       Implement current_sub.monday_content (and a similar
             #         call for all other days).
-            qry = SubscriptionGroup.query(SubscriptionGroup.author_id==str(user.user_id))
-            current_sub = qry.fetch(1)
+            qry = SubscriptionGroup.query(SubscriptionGroup.author_id==str(user.user_id()))
+            current_sub = qry.get()
             self.response.headers['Content-Type'] = 'text/html'
-            html = (getMainHTML() % (user.nickname(), current_sub,
-                current_sub, current_sub,
-                current_sub, current_sub,
-                current_sub, current_sub,
+            html = (getMainHTML() % (user.nickname(), current_sub.monday_content,
+                current_sub.tuesday_content, current_sub.wednesday_content,
+                current_sub.thursday_content, current_sub.friday_content,
+                current_sub.saturday_content, current_sub.sunday_content,
                 user.user_id()))
             self.response.write(html)
         else:
