@@ -2,7 +2,7 @@ import os
 import jinja2
 import webapp2
 import datetime
-from SubscriptionStore import Subscribe
+from SubscriptionStore import Subscribe, Unsubscribe
 from google.appengine.api import users
 from SendEmail import SendEmail
 
@@ -60,6 +60,7 @@ application = webapp2.WSGIApplication([
     ('/', MainPage),
     ('/Logout', LogoutPage),
     ('/Subscribeform', SubscribeForm),
+    ('/Unsubscribe', Unsubscribe),
     ('/Subscribe', Subscribe),
     ('/Forcemail', SendEmail)
 ],debug=True)
