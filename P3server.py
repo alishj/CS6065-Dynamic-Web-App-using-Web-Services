@@ -59,7 +59,7 @@ class Subscribe(webapp2.RequestHandler):
             
 class MainPage(webapp2.RequestHandler):
     def getHTML(self):
-        f = open('templates/Main.html', 'r')
+        f = open('Main.html', 'r')
         return f.read()    
         
     def get(self):
