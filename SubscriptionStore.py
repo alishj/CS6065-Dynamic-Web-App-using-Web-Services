@@ -21,7 +21,7 @@ class Subscribe(webapp2.RequestHandler):
         # Get current user
         user = users.get_current_user()
 
-        if user and not user.user_id() is None:
+        if user and user.user_id() is not None:
             # Check for existing user sub entry, if one does not exist
             # then create a new subscription model entry for them.
             query = SubscriptionGroupModel.query(
