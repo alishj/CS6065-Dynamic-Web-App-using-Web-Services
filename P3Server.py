@@ -1,9 +1,8 @@
 import os
-import urllib
 import jinja2
 import webapp2
-import cgi
 import datetime
+from SubscriptionStore import Subscribe
 from google.appengine.api import users
 
 
@@ -55,26 +54,15 @@ class ForceMail(SendMail):
 
 class SubscribeForm(webapp2.RequestHandler):
     def getHTML(self):
-        f = open('Subscribe.html', 'r')
+        f = open('Subscribe_Form.html', 'r')
         return f.read()
 
     def get(self):
         user = users.get_current_user()
         if user and user.user_id() is not None:
             self.response.headers['Content-Type'] = 'text/html'
-            template_values = {
-                'user_id': user.user_id(),
-                'site': self.request.get('site'),
-                'mon': self.request.get('mon'),
-                'tue': self.request.get('tue'),
-                'wed': self.request.get('wed'),
-                'thu': self.request.get('thu'),
-                'fri': self.request.get('fri'),
-                'sat': self.request.get('sat'),
-                'sun': self.request.get('sun'),
-            }
-            template = JINJA_ENVIRONMENT.get_template('Subscribe.html')
-            self.response.write(template.render(template_values))
+            html = self.getHTML()
+            self.response.write(html)
         else:
             self.redirect('/Logout')
 
@@ -97,6 +85,7 @@ application = webapp2.WSGIApplication([
     ('/', MainPage),
     ('/Logout', LogoutPage),
     ('/Subscribeform', SubscribeForm),
+    ('/Subscribe', Subscribe),
     ('/Forcemail', ForceMail),
     ('/Sendemail', SendMail)
 ],debug=True)
