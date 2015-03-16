@@ -27,18 +27,6 @@ class LogoutPage(webapp2.RequestHandler):
             self.response.headers['Content-Type'] = 'text/html'
             self.response.write(html)
 
-class SendMail(webapp2.RequestHandler):
-    def sendEmail(self):
-        # TODO: Add functionality to send emails based on 
-        return True
-
-    def getMail(self, user, date):
-        # TODO: Add functionality to query database for email information
-        return True
-
-    def post(self):
-        self.response.headers['Content-Type'] = 'text/html'
-        self.response.write('<h1>FUNCTIONALITY TO BE ADDED</h1>')
         
             
 class ForceMail(SendMail):
@@ -87,6 +75,5 @@ application = webapp2.WSGIApplication([
     ('/Logout', LogoutPage),
     ('/Subscribeform', SubscribeForm),
     ('/Subscribe', Subscribe),
-    ('/Forcemail', SendEmail),
-    ('/Sendemail', SendMail)
+    ('/Forcemail', SendEmail)
 ],debug=True)
