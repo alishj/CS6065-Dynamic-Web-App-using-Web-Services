@@ -41,13 +41,14 @@ class SendEmail(webapp2.RedirectHandler):
             else:
                 # Create string to use in eval
                 query_day = 'current_subscription_group.' + day
-                # Queries datastore for the current day's links
-                daily_links = str(eval(query_day)).replace(';', '\n')
-
-                subject = 'Your Daily Subscription'
-                body = 'Your content for the day is...\n' + daily_links
-                mail.send_mail(APP_EMAIL, user_email, subject, body)
-
-                self.redirect('/')
-        else:
-            self.redirect('/Logout')
+                daily_links = eval(query_day)
+                if daily_links is not None:
+                    # Queries datastore for the current day's links
+                    daily_links = str(daily_links.replace(';', '\n'))
+                    subject = 'Your Daily Subscription'
+                    body = 'Your content for the day is...\n' + daily_links
+                    mail.send_mail(APP_EMAIL, user_email, subject, body)
+                    self.redirect('/')
+                else:
+                    self.response.headers['Content Type'] = 'text/html'
+                    self.response.write(self.getHTML())
