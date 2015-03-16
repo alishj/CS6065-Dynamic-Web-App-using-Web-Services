@@ -19,26 +19,21 @@ class SubscriptionGroupModel(ndb.Model):
 
 class Unsubscribe(webapp2.RequestHandler):
     def get(self):
-        if True:
-            logging.debug("This functionality is not supported yet")
-            self.redirect("/")
+        user = users.get_current_user()
+        if user and user.user_id() is not None:
+            query = SubscriptionGroupModel.query(
+                SubscriptionGroupModel.subscriber_id == user.user_id()
+            )
+            current_subscription_group = query.get()
+            if current_subscription_group is not None:
+                current_subscription_group.key.delete()
+            self.redirect('/')
+        elif not user:
+            self.response.headers['Content-Type'] = 'text/html'
+            self.response.write('<a href="%s">Sign in</a>' % users.create_login_url('/'))
         else:
-            user = users.get_current_user()
-            if user and user.user_id() is not None:
-                query = SubscriptionGroupModel.query(
-                    SubscriptionGroupModel.subscriber_id == user.user_id()
-                )
-                current_subscription_group = query.get()
-                if current_subscription_group is not None:
-                    current_subscription_group.delete()
-                    current_subscription_group.put()
-                self.redirect('/')
-            elif not user:
-                self.response.headers['Content-Type'] = 'text/html'
-                self.response.write('<a href="%s">Sign in</a>' % users.create_login_url('/'))
-            else:
-                self.response.headers['Content-Type'] = 'text/html'
-                self.response.write('Please <a href=%s>sign in</a> with a Google account' % users.create_login_url('/'))
+            self.response.headers['Content-Type'] = 'text/html'
+            self.response.write('Please <a href=%s>sign in</a> with a Google account' % users.create_login_url('/'))
 
 
 class Subscribe(webapp2.RequestHandler):
