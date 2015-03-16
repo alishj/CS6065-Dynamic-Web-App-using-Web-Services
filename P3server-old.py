@@ -34,7 +34,7 @@ class SendMail(webapp2.RequestHandler):
 class ForceMail(SendMail):
     def post(self):
         user = users.get_current_user()
-        if user and not user.user_id() is None:
+        if user and not user.user_id() == 'None':
             # The weekday returns the day of the week from 0-6 Mon-Sun respectively
             self.getMail(user.user_id(), datetime.datetime.today().weekday())
             self.response.headers['Content-Type'] = 'text/html'
@@ -49,7 +49,7 @@ class Subscribe(webapp2.RequestHandler):
 
     def post(self):
         user = users.get_current_user()
-        if user and not user.user_id() is None:
+        if user and not user.user_id() == None:
             self.response.headers['Content-Type'] = 'text/html'
             html = (self.getHTML() % (user.user_id(), self.request.get('site'), self.request.get('mon'), self.request.get('tue'),
                     self.request.get('wed'), self.request.get('thu'), self.request.get('fri'), self.request.get('sat'), self.request.get('sun')))
@@ -59,12 +59,12 @@ class Subscribe(webapp2.RequestHandler):
             
 class MainPage(webapp2.RequestHandler):
     def getHTML(self):
-        f = open('templates/Main.html', 'r')
+        f = open('Main.html', 'r')
         return f.read()    
         
     def get(self):
         user = users.get_current_user()
-        if user and not user.user_id() is None:
+        if user and not user.user_id() == None:
             html = (self.getHTML() % (user.nickname(), users.create_logout_url('/Logout')))
             self.response.headers['Content-Type'] = 'text/html'
             self.response.write(html)

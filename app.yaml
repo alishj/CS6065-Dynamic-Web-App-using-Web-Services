@@ -6,4 +6,4 @@ threadsafe: true
 
 handlers:
  - url: /.*
-   script: P3server.application
+   script: P3Server.application
