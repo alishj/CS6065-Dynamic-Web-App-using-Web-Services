@@ -4,6 +4,7 @@ import webapp2
 import datetime
 from SubscriptionStore import Subscribe
 from google.appengine.api import users
+from SendEmail import SendEmail
 
 
 JINJA_ENVIRONMENT = jinja2.Environment(
@@ -78,7 +79,7 @@ class MainPage(webapp2.RequestHandler):
             template = JINJA_ENVIRONMENT.get_template('Main.html')
             self.response.write(template.render(template_values))
         else:
-            self.redirect(users.create_login_url)
+            self.redirect(users.create_login_url())
 
 
 application = webapp2.WSGIApplication([
@@ -86,6 +87,6 @@ application = webapp2.WSGIApplication([
     ('/Logout', LogoutPage),
     ('/Subscribeform', SubscribeForm),
     ('/Subscribe', Subscribe),
-    ('/Forcemail', ForceMail),
+    ('/Forcemail', SendEmail),
     ('/Sendemail', SendMail)
 ],debug=True)
