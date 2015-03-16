@@ -1,5 +1,5 @@
 import webapp2
-import cgi
+
 from google.appengine.api import users
 from google.appengine.ext import ndb
 
@@ -34,10 +34,9 @@ class SubscribeStore(webapp2.RequestHandler):
         # for whatever day they had checked.
         # TODO: Allow multiple websites per entry.
         group_name = DEFAULT_SUBGROUP_NAME
-        subscription_model = SubscriptionGroup(
-            parent=group_key(group_name),
-            author_id=users.get_current_user().user_id(),
-            author_email=users.get_current_user().email())
+        qry = SubscriptionGroup.query(SubscriptionGroup.author_id==str(users.get_current_user().user_id()))
+        subscription_model = qry.get()
+        
         site = self.request.get('site')
         if self.request.get('mon') == 'Monday':
             subscription_model.monday_content = site
