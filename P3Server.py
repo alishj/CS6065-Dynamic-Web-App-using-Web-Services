@@ -14,18 +14,17 @@ JINJA_ENVIRONMENT = jinja2.Environment(
 
 
 class LogoutPage(webapp2.RequestHandler):
-    def getHTML(self):
-        f = open('Logout.html', 'r')
-        return f.read()
         
     def get(self):
         user = users.get_current_user()
-        if user and not user.user_id() == None:
+        if user and user.user_id() is not None:
             self.redirect('/')
         else:
-            html = (self.getHTML() % users.create_login_url('/'))
-            self.response.headers['Content-Type'] = 'text/html'
-            self.response.write(html)
+            template_values = {
+                'login_url': users.create_login_url('/')
+            }
+            template = JINJA_ENVIRONMENT.get_template('Logout.html')
+            self.response.write(template.render(template_values))
 
 
 class SubscribeForm(webapp2.RequestHandler):
