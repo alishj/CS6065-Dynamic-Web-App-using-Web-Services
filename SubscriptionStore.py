@@ -60,43 +60,50 @@ class Subscribe(webapp2.RequestHandler):
                 if current_subscription_group.monday_content is None:
                     current_subscription_group.monday_content = site
                 else:
-                    current_subscription_group.monday_content = str(current_subscription_group.monday_content)+';'+site
+                    if site not in str(current_subscription_group.monday_content):
+                        current_subscription_group.monday_content = str(current_subscription_group.monday_content)+';'+site
                 logging.debug("Monday content: %s", str(current_subscription_group.monday_content))
             if self.request.get('tue') == 'Tuesday':
                 if current_subscription_group.tuesday_content is None:
                     current_subscription_group.tuesday_content = site
                 else:
-                    current_subscription_group.tuesday_content = str(current_subscription_group.tuesday_content)+';'+site
+                    if site not in str(current_subscription_group.tuesday_content):
+                        current_subscription_group.tuesday_content = str(current_subscription_group.tuesday_content)+';'+site
                 logging.debug("Tuesday content: %s", str(current_subscription_group.tuesday_content))
             if self.request.get('wed') == 'Wednesday':
                 if current_subscription_group.wednesday_content is None:
                     current_subscription_group.wednesday_content = site
                 else:
-                    current_subscription_group.wednesday_content = str(current_subscription_group.wednesday_content)+';'+site
+                    if site not in str(current_subscription_group.wednesday_content):
+                        current_subscription_group.wednesday_content = str(current_subscription_group.wednesday_content)+';'+site
                 logging.debug("Wednesday content: %s", str(current_subscription_group.wednesday_content))
             if self.request.get('thu') == 'Thursday':
                 if current_subscription_group.thursday_content is None:
                     current_subscription_group.thursday_content = site
                 else:
-                    current_subscription_group.thursday_content = str(current_subscription_group.thursday_content)+';'+site
+                    if site not in str(current_subscription_group.thursday_content):
+                        current_subscription_group.thursday_content = str(current_subscription_group.thursday_content)+';'+site
                 logging.debug("Thursday content: %s", str(current_subscription_group.thursday_content))
             if self.request.get('fri') == 'Friday':
                 if current_subscription_group.friday_content is None:
                     current_subscription_group.friday_content = site
                 else:
-                    current_subscription_group.friday_content = str(current_subscription_group.friday_content)+';'+site
+                    if site not in str(current_subscription_group.friday_content):
+                        current_subscription_group.friday_content = str(current_subscription_group.friday_content)+';'+site
                 logging.debug("Friday content: %s", str(current_subscription_group.friday_content))
             if self.request.get('sat') == 'Saturday':
                 if current_subscription_group.sunday_content is None:
                     current_subscription_group.saturday_content = site
                 else:
-                    current_subscription_group.saturday_content = str(current_subscription_group.saturday_content)+';'+site
+                    if site not in str(current_subscription_group.saturday_content):
+                        current_subscription_group.saturday_content = str(current_subscription_group.saturday_content)+';'+site
                 logging.debug("Saturday content: %s", str(current_subscription_group.saturday_content))
             if self.request.get('sun') == 'Sunday':
                 if current_subscription_group.sunday_content is None:
                     current_subscription_group.sunday_content = site
                 else:
-                    current_subscription_group.sunday_content = str(current_subscription_group.sunday_content)+';'+site
+                    if site not in str(current_subscription_group.sunday_content):
+                        current_subscription_group.sunday_content = str(current_subscription_group.sunday_content)+';'+site
                 logging.debug("Sunday content: %s", str(current_subscription_group.sunday_content))
 
             current_subscription_group.put()
