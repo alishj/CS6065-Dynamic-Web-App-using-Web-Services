@@ -41,13 +41,14 @@ class ForceMail(SendMail):
             self.response.write("<h1>Today's numeric date is: %s</h1>" % datetime.datetime.today().weekday())
         else:
             self.redirect('/Logout')
-            
-class Subscribe(webapp2.RequestHandler):
+
+
+class SubscribeForm(webapp2.RequestHandler):
     def getHTML(self):
         f = open('Subscribe.html', 'r')
         return f.read()
 
-    def post(self):
+    def get(self):
         user = users.get_current_user()
         if user and not user.user_id() == None:
             self.response.headers['Content-Type'] = 'text/html'
@@ -80,7 +81,7 @@ class MainPage(webapp2.RequestHandler):
 application = webapp2.WSGIApplication([
     ('/', MainPage),
     ('/Logout', LogoutPage),
-    ('/Subscribe', Subscribe),
+    ('/Subscribeform', SubscribeForm),
     ('/Forcemail', ForceMail),
     ('/Sendemail', SendMail)
 ],debug=True)

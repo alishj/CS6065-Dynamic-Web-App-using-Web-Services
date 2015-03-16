@@ -52,7 +52,7 @@ class Subscribe(webapp2.RequestHandler):
                 current_subscription_group.sunday_content += ';'.append(site)
 
             current_subscription_group.put()
-            self.redirect('/subscribeform')
+            self.redirect('/Subscribeform')
         elif not user:
             self.response.headers['Content-Type'] = 'text/html'
             self.response.write('<a href="%s">Sign in</a>' % users.create_login_url('/'))

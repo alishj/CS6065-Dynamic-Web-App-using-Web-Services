@@ -1,0 +1,22 @@
+<html>
+    <body>
+        <p>
+            Enter a site to subscribe to and check which days you would like an update. <br>
+            <form action="/subscribe" method="post">
+                <input type="text" name="site" value="www.example.com">
+                <input type="checkbox" name="mon" value="Monday">Monday
+                <input type="checkbox" name="tue" value="Tuesday">Tuesday
+                <input type="checkbox" name="wed" value="Wednesday">Wednesday
+                <input type="checkbox" name="thu" value="Thursday">Thursday
+                <input type="checkbox" name="fri" value="Friday">Friday
+                <input type="checkbox" name="sat" value="Saturday">Saturday
+                <input type="checkbox" name="sun" value="Sunday">Sunday
+                <div><input type="submit" value="Submit"></div>
+            </form>
+        <br>
+            <form action="/" method="get">
+                <input type="submit" value="Exit to Home">
+            </form>
+        </p>
+    </body>
+<html>
