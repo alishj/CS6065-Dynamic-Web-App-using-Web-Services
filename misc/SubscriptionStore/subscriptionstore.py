@@ -30,32 +30,31 @@ def getSubHTML():
 # This is called when a subscription form is submitted.
 class SubscribeStore(webapp2.RequestHandler):
     def post(self):
-        # Save the user's id, email, and assign the website
-        # for whatever day they had checked.
-        # TODO: Allow multiple websites per entry.
         group_name = DEFAULT_SUBGROUP_NAME
-        qry = SubscriptionGroup.query(SubscriptionGroup.author_id==str(users.get_current_user().user_id()))
+        qry = SubscriptionGroup.query(SubscriptionGroup.author_id==str(10000))
         subscription_model = qry.get()
-        
-        site = self.request.get('site')
-        if self.request.get('mon') == 'Monday':
-            subscription_model.monday_content = site
-        if self.request.get('tue') == 'Tuesday':
-            subscription_model.tuesday_content = site
-        if self.request.get('wed') == 'Wednesday':
-            subscription_model.wednesday_content = site
-        if self.request.get('thu') == 'Thursday':
-            subscription_model.thursday_content = site
-        if self.request.get('fri') == 'Friday':
-            subscription_model.friday_content = site
-        if self.request.get('sat') == 'Saturday':
-            subscription_model.saturday_content = site
-        if self.request.get('sun') == 'Sunday':
-            subscription_model.sunday_content = site
-        # Write the data to the datastore
-        subscription_model.put()
-        html = (getSubHTML() % (self.request.get('id')))
-        self.response.write(html)
+        if subscription_model is None:
+            self.response.write('Is None')
+        else:   
+            site = self.request.get('site')
+            if self.request.get('mon') == 'Monday':
+                subscription_model.monday_content = site
+            if self.request.get('tue') == 'Tuesday':
+                subscription_model.tuesday_content = site
+            if self.request.get('wed') == 'Wednesday':
+                subscription_model.wednesday_content = site
+            if self.request.get('thu') == 'Thursday':
+                subscription_model.thursday_content = site
+            if self.request.get('fri') == 'Friday':
+                subscription_model.friday_content = site
+            if self.request.get('sat') == 'Saturday':
+                subscription_model.saturday_content = site
+            if self.request.get('sun') == 'Sunday':
+                subscription_model.sunday_content = site
+            # Write the data to the datastore
+            subscription_model.put()
+            html = (getSubHTML() % (self.request.get('id')))
+            self.response.write(html)
 
 class MainPage(webapp2.RequestHandler):
     def get(self):
