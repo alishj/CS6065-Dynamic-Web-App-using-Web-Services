@@ -27,19 +27,6 @@ class LogoutPage(webapp2.RequestHandler):
             self.response.headers['Content-Type'] = 'text/html'
             self.response.write(html)
 
-        
-            
-class ForceMail(SendMail):
-    def post(self):
-        user = users.get_current_user()
-        if user and not user.user_id() == 'None':
-            # The weekday returns the day of the week from 0-6 Mon-Sun respectively
-            self.getMail(user.user_id(), datetime.datetime.today().weekday())
-            self.response.headers['Content-Type'] = 'text/html'
-            self.response.write("<h1>Today's numeric date is: %s</h1>" % datetime.datetime.today().weekday())
-        else:
-            self.redirect('/Logout')
-
 
 class SubscribeForm(webapp2.RequestHandler):
     def getHTML(self):
