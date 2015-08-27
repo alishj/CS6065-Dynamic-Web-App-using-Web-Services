@@ -1,7 +1,11 @@
-CloudComputingP3
+Dynamic Web App using Web Services or NoSQL
 ================
 
-Dynamic Web App using Web Services or NoSQL
+CS6065 Intro to Cloud Computing Project 3
+
+*Cloned from University of Cincinnati's git site, github.uc.edu*
+
+*Assignment Outline: https://docs.google.com/document/d/172ERWTj9kyKhdmNIceadijgnnfdBrmev88aNO7x3HZ8/*
 
 *Anthony Kleiser, Chris McVeigh, Sean Schatzman*
 
